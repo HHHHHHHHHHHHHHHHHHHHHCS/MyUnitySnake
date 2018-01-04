@@ -473,7 +473,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &699869728
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -538,7 +538,7 @@ RectTransform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 699869727}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 960, y: 540, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1891695176}
@@ -1228,12 +1228,6 @@ Prefab:
       propertyPath: m_RootOrder
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 212263603779168674, guid: ab9ddac5226743241bc68dcadd703f7f,
-        type: 2}
-      propertyPath: m_Sprite
-      value: 
-      objectReference: {fileID: 21300000, guid: b40f2806342ef0a4697d33bdfc47f48f,
-        type: 3}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: ab9ddac5226743241bc68dcadd703f7f, type: 2}
   m_IsPrefabParent: 0
@@ -1351,6 +1345,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 1564208974}
+  - component: {fileID: 1564208975}
   m_Layer: 0
   m_Name: Snakes
   m_TagString: Untagged
@@ -1372,6 +1367,22 @@ Transform:
   m_Father: {fileID: 524178693}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1564208975
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1564208973}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3c911fd448cd2504089444f15d7f8b4a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bodyPrefab: {fileID: 114622644538646886, guid: 111dab518f8ab554981d953fb0c0a03f,
+    type: 2}
+  bodySprites:
+  - {fileID: 21300000, guid: 453b92a9f25c44e44b990584cd298796, type: 3}
+  - {fileID: 21300000, guid: 0ce58dd12fa36cd45bcbee0408ea0eea, type: 3}
 --- !u!1 &1873781406
 GameObject:
   m_ObjectHideFlags: 0
@@ -1471,7 +1482,7 @@ RectTransform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1891695175}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -660, y: 0, z: 0}
+  m_LocalPosition: {x: 250, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 957842822}
@@ -1518,27 +1529,11 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1891695175}
---- !u!1 &1983996880 stripped
-GameObject:
-  m_PrefabParentObject: {fileID: 1063115643976914, guid: ab9ddac5226743241bc68dcadd703f7f,
-    type: 2}
-  m_PrefabInternal: {fileID: 1375549162}
 --- !u!4 &1983996881 stripped
 Transform:
   m_PrefabParentObject: {fileID: 4039269298860664, guid: ab9ddac5226743241bc68dcadd703f7f,
     type: 2}
   m_PrefabInternal: {fileID: 1375549162}
---- !u!114 &1983996882
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1983996880}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5d22aa8c8ad30f3459969154233f44e5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &2017950168
 GameObject:
   m_ObjectHideFlags: 0

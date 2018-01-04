@@ -2,30 +2,51 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SnakeHead : MonoBehaviour
+public class SnakeHead : SnakeBody
 {
     [SerializeField]
     private const int baseSpeed = 1;
     [SerializeField]
     private const int upSpeed = 2;
 
+    private bool isSpeedUp;
     private float nowSpeed = baseSpeed;
 
     private Vector2 movePos = new Vector2(1, 0);
 
+
+    private SnakeBodyController snakeBodyCtrl;
+
+    private void Awake()
+    {
+        Init(transform.position);
+    }
+
     private void Update()
     {
         WillMove();
+        MoveBody();
     }
+
+    public override SnakeBody Init(Vector3 pos)
+    {
+        snakeBodyCtrl = transform.parent
+            .GetComponent<SnakeBodyController>().Init();
+        return base.Init(pos);
+    }
+
+
 
     private void WillMove()
     {
         if (Input.GetKeyDown(KeyCode.Space))
         {
+            isSpeedUp = true;
             nowSpeed = upSpeed;
         }
         else if (Input.GetKeyUp(KeyCode.Space))
         {
+            isSpeedUp = false;
             nowSpeed = baseSpeed;
         }
 
@@ -77,5 +98,32 @@ public class SnakeHead : MonoBehaviour
             rot = 90;
         }
         transform.localRotation = Quaternion.Euler(0, 0, rot);
+    }
+
+    private void MoveBody()
+    {
+        snakeBodyCtrl.MoveBody(PosQueue.Peek(), isSpeedUp);
+        UpdatePos(transform.position, isSpeedUp);
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.CompareTag(Tags.Food))
+        {
+            EatFood(collision.gameObject);
+        }
+    }
+
+    private void EatFood(GameObject food)
+    {
+        MainGameManager.Instance.FoodManager.EatFood(food);
+        if (snakeBodyCtrl.GetBodyLength() > 0)
+        {
+            snakeBodyCtrl.GrowBody();
+        }
+        else
+        {
+            snakeBodyCtrl.GrowBody(PosQueue.Peek());
+        }
     }
 }

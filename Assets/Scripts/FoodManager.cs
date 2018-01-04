@@ -51,4 +51,13 @@ public class FoodManager : MonoBehaviour
         y = Random.Range(border.y, border.w);
         newSR.transform.position = new Vector2(x, y);
     }
+
+    public void EatFood(GameObject food, bool needSpawn = true)
+    {
+        Destroy(food);
+        if (needSpawn)
+        {
+            SpawnFood();
+        }
+    }
 }
