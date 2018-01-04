@@ -14,7 +14,6 @@ public class SnakeHead : SnakeBody
 
     private Vector2 movePos = new Vector2(1, 0);
 
-
     private SnakeBodyController snakeBodyCtrl;
 
     private void Awake()
@@ -34,8 +33,6 @@ public class SnakeHead : SnakeBody
             .GetComponent<SnakeBodyController>().Init();
         return base.Init(pos);
     }
-
-
 
     private void WillMove()
     {

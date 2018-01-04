@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class SnakeBodyController : MonoBehaviour
@@ -9,17 +10,17 @@ public class SnakeBodyController : MonoBehaviour
     [SerializeField]
     private Sprite[] bodySprites = new Sprite[2];
 
-    private List<SnakeBody> snakeBodyStack;
+    private Queue<SnakeBody> snakeBodyQueue;
 
     public SnakeBodyController Init()
     {
-        snakeBodyStack = new List<SnakeBody>();
+        snakeBodyQueue = new Queue<SnakeBody>();
         return this;
     }
 
     public void MoveBody(Vector3 headPos,bool isSpeedUp = false)
     {
-        foreach (var item in snakeBodyStack)
+        foreach (var item in snakeBodyQueue)
         {
             headPos = item.UpdatePos(headPos, isSpeedUp);
         }
@@ -27,14 +28,14 @@ public class SnakeBodyController : MonoBehaviour
 
     public int GetBodyLength()
     {
-        return snakeBodyStack.Count;
+        return snakeBodyQueue.Count;
     }
 
     public void GrowBody()
     {
-        if (snakeBodyStack.Count > 0)
+        if (snakeBodyQueue.Count > 0)
         {
-            GrowBody(snakeBodyStack[snakeBodyStack.Count-1].PosQueue.Peek());
+            GrowBody(snakeBodyQueue.Last().PosQueue.Peek());
         }
     }
 
@@ -43,9 +44,9 @@ public class SnakeBodyController : MonoBehaviour
         if(bodyPrefab)
         {
             SnakeBody newBody = Instantiate(bodyPrefab, transform);
-            newBody.Init(pos, bodySprites[snakeBodyStack.Count % 2]);
-            snakeBodyStack.Add(newBody);
-            newBody.gameObject.name = snakeBodyStack.Count.ToString();
+            newBody.Init(pos, bodySprites[snakeBodyQueue.Count % 2]);
+            snakeBodyQueue.Enqueue(newBody);
+            newBody.gameObject.name = snakeBodyQueue.Count.ToString();
         }
     }
 
