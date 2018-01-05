@@ -4,15 +4,12 @@ using UnityEngine;
 
 public class FoodManager : MonoBehaviour
 {
-    /// <summary>
-    /// X 左边  Y 下边  Z 右边  W 上边
-    /// </summary>
-    [SerializeField]
-    private Vector4 border;
+
     [SerializeField]
     private SpriteRenderer foodPrefab;
     [SerializeField]
     private Sprite[] foodSprites;
+
 
     private Transform foodRoot;
 
@@ -42,7 +39,7 @@ public class FoodManager : MonoBehaviour
     public void SpawnFood()
     {
         if (!canSpawn) return;
-
+        Vector4 border = MainGameManager.Instance.BorderManager.Border;
         SpriteRenderer newSR = Instantiate(foodPrefab, foodRoot);
         int randomInt = Random.Range(0, foodSprites.Length);
         newSR.sprite = foodSprites[randomInt];

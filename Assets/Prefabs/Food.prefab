@@ -21,6 +21,7 @@ GameObject:
   - component: {fileID: 4745797259417356}
   - component: {fileID: 212848664718104616}
   - component: {fileID: 61244373737187266}
+  - component: {fileID: 114057623881567212}
   m_Layer: 0
   m_Name: Food
   m_TagString: Food
@@ -66,6 +67,17 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1.8, y: 1.8}
   m_EdgeRadius: 0
+--- !u!114 &114057623881567212
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1516170103412850}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a38a9b19507a58342abcd3e0101b30bf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!212 &212848664718104616
 SpriteRenderer:
   m_ObjectHideFlags: 1

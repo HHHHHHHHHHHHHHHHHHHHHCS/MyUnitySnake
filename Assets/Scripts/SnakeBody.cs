@@ -6,7 +6,7 @@ public class SnakeBody : MonoBehaviour
 {
     public Queue<Vector3> PosQueue { get; private set; }
 
-    private const int queueLength = 20;
+    private const int queueLength = 30;
 
     public virtual SnakeBody Init(Vector3 pos, Sprite sprite)
     {
@@ -38,5 +38,18 @@ public class SnakeBody : MonoBehaviour
         }
         transform.position = pos;
         return lastPos;
+    }
+
+    protected virtual void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.CompareTag(TagsNamesLayers.Head))
+        {
+            EnterBody(collision.gameObject);
+        }
+    }
+
+    private void EnterBody(GameObject body)
+    {
+        Debug.Log(body.name);
     }
 }

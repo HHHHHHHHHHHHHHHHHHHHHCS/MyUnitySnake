@@ -11,24 +11,25 @@ public class SnakeHead : SnakeBody
 
     private bool isSpeedUp;
     private float nowSpeed = baseSpeed;
-
-    private Vector2 movePos = new Vector2(1, 0);
+    private Vector2 movePos;
 
     private SnakeBodyController snakeBodyCtrl;
-
-    private void Awake()
-    {
-        Init(transform.position);
-    }
 
     private void Update()
     {
         WillMove();
         MoveBody();
+        MoveBorder();
+    }
+
+    public SnakeHead Init()
+    {
+        return (SnakeHead)Init(transform.position);
     }
 
     public override SnakeBody Init(Vector3 pos)
     {
+        movePos = new Vector2(1, 0);
         snakeBodyCtrl = transform.parent
             .GetComponent<SnakeBodyController>().Init();
         return base.Init(pos);
@@ -75,6 +76,30 @@ public class SnakeHead : SnakeBody
         transform.localPosition = oldPos;
     }
 
+    private void MoveBorder()
+    {
+        Vector3 newPos = transform.position;
+        Vector4 border = MainGameManager.Instance.BorderManager.Border;
+        if (newPos.y > border.w)
+        {
+            newPos.y = border.y;
+        }
+        else if (newPos.y < border.y)
+        {
+            newPos.y = border.w;
+        }
+        else if (newPos.x > border.z)
+        {
+            newPos.x = border.x;
+        }
+        else if (newPos.x < border.x)
+        {
+            newPos.x = border.z;
+        }
+
+        transform.position = newPos;
+    }
+
     private void Rotate(Vector2 rotate)
     {
         int rot = 0;
@@ -103,17 +128,13 @@ public class SnakeHead : SnakeBody
         UpdatePos(transform.position, isSpeedUp);
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    protected override void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.CompareTag(Tags.Food))
-        {
-            EatFood(collision.gameObject);
-        }
+
     }
 
-    private void EatFood(GameObject food)
+    public void GrowUpBody()
     {
-        MainGameManager.Instance.FoodManager.EatFood(food);
         if (snakeBodyCtrl.GetBodyLength() > 0)
         {
             snakeBodyCtrl.GrowBody();
@@ -122,5 +143,18 @@ public class SnakeHead : SnakeBody
         {
             snakeBodyCtrl.GrowBody(PosQueue.Peek());
         }
+    }
+
+
+    private void GetAward(GameObject award)
+    {
+
+    }
+
+
+
+    private void EnterBorder(GameObject border)
+    {
+
     }
 }

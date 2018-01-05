@@ -10,6 +10,8 @@ public class SnakeBodyController : MonoBehaviour
     [SerializeField]
     private Sprite[] bodySprites = new Sprite[2];
 
+    private const int ingoreBodyCollider = 2;
+
     private Queue<SnakeBody> snakeBodyQueue;
 
     public SnakeBodyController Init()
@@ -18,7 +20,7 @@ public class SnakeBodyController : MonoBehaviour
         return this;
     }
 
-    public void MoveBody(Vector3 headPos,bool isSpeedUp = false)
+    public void MoveBody(Vector3 headPos, bool isSpeedUp = false)
     {
         foreach (var item in snakeBodyQueue)
         {
@@ -41,12 +43,16 @@ public class SnakeBodyController : MonoBehaviour
 
     public void GrowBody(Vector3 pos)
     {
-        if(bodyPrefab)
+        if (bodyPrefab)
         {
             SnakeBody newBody = Instantiate(bodyPrefab, transform);
             newBody.Init(pos, bodySprites[snakeBodyQueue.Count % 2]);
             snakeBodyQueue.Enqueue(newBody);
             newBody.gameObject.name = snakeBodyQueue.Count.ToString();
+            if (snakeBodyQueue.Count <= ingoreBodyCollider)
+            {
+                newBody.GetComponent<BoxCollider2D>().enabled = false;
+            }
         }
     }
 
