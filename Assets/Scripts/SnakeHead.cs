@@ -143,18 +143,6 @@ public class SnakeHead : SnakeBody
         {
             snakeBodyCtrl.GrowBody(PosQueue.Peek());
         }
-    }
-
-
-    private void GetAward(GameObject award)
-    {
-
-    }
-
-
-
-    private void EnterBorder(GameObject border)
-    {
-
+        MainGameManager.Instance.UpdateBodyLength(snakeBodyCtrl.GetBodyLength());
     }
 }

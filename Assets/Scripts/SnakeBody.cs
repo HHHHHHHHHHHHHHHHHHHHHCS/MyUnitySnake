@@ -42,7 +42,7 @@ public class SnakeBody : MonoBehaviour
 
     protected virtual void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.CompareTag(TagsNamesLayers.Head))
+        if (collision.CompareTag(TagsLayersNames.Head))
         {
             EnterBody(collision.gameObject);
         }

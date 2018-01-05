@@ -4,15 +4,24 @@ using UnityEngine;
 
 public class MainGameManager : MonoBehaviour
 {
-
     public static MainGameManager Instance { get; private set; }
     public Transform GameObjectRoot { get; private set; }
     public FoodManager FoodManager { get; private set; }
     public BorderManager BorderManager { get; private set; }
     public SnakeHead SnakeHead { get; private set; }
+    public MainUIManager MainUIManager { get; private set; }
 
     [SerializeField]
     private SnakeHead snakeHeadPrefab;
+
+
+    private const int foodScore = 1;
+    private const int rewardScore = 5;
+    private const int spawnRewardNumber = 5;
+
+    private int score;
+    private int getFoodCount;
+
 
     private void Awake()
     {
@@ -20,6 +29,7 @@ public class MainGameManager : MonoBehaviour
         GameObjectRoot = GameObject.Find("GameObjectRoot").transform;
         BorderManager = GetComponent<BorderManager>();
         SpawnSnakeHead();
+        MainUIManager = GameObject.Find("UIRoot").GetComponent<MainUIManager>().Init(true);
         FoodManager = GetComponent<FoodManager>().Init(GameObjectRoot);
     }
 
@@ -33,4 +43,31 @@ public class MainGameManager : MonoBehaviour
         var snakeParent = GameObjectRoot.Find("Snakes").transform;
         SnakeHead = Instantiate(snakeHeadPrefab, snakeParent).Init();
     }
+
+    public void GetFood()
+    {
+        getFoodCount += 1;
+        if (getFoodCount % spawnRewardNumber == 0)
+        {
+            FoodManager.SpawnReward();
+        }
+        GetScore(foodScore);
+    }
+
+    public void GetReward(float pre)
+    {
+        GetScore((int)Mathf.Ceil(rewardScore * pre));
+    }
+
+    public void UpdateBodyLength(int length)
+    {
+        MainUIManager.UpdateLength(length);
+    }
+
+    private void GetScore(int _score)
+    {
+        score += _score;
+        MainUIManager.UpdatScore(score);
+    }
+
 }

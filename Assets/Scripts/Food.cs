@@ -6,7 +6,7 @@ public class Food : MonoBehaviour
 {
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.CompareTag(TagsNamesLayers.Head))
+        if (collision.CompareTag(TagsLayersNames.Head))
         {
             EatFood();
         }
@@ -14,7 +14,9 @@ public class Food : MonoBehaviour
 
     private void EatFood()
     {
-        MainGameManager.Instance.FoodManager.EatFood(gameObject);
-        MainGameManager.Instance.SnakeHead.GrowUpBody();
+        var gm = MainGameManager.Instance;
+        gm.FoodManager.EatFood(gameObject);
+        gm.GetFood();
+        gm.SnakeHead.GrowUpBody();
     }
 }

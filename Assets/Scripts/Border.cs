@@ -6,7 +6,7 @@ public class Border : MonoBehaviour
 {
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.CompareTag(TagsNamesLayers.Head))
+        if (collision.CompareTag(TagsLayersNames.Head))
         {
             EnterBorder();
         }

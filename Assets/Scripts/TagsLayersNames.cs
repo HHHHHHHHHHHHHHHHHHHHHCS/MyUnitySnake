@@ -1,10 +1,10 @@
-﻿public class TagsNamesLayers
+﻿public class TagsLayersNames
 {
     #region Tags
     public const string Head = "Head";
     public const string Food = "Food";
     public const string Body = "Body";
-    public const string Award = "Award";
+    public const string Reward = "Reward";
     public const string Border = "Border";
     #endregion
 
