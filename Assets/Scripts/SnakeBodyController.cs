@@ -51,7 +51,7 @@ public class SnakeBodyController : MonoBehaviour
             newBody.gameObject.name = snakeBodyQueue.Count.ToString();
             if (snakeBodyQueue.Count <= ingoreBodyCollider)
             {
-                newBody.GetComponent<BoxCollider2D>().enabled = false;
+                newBody.GetComponent<CircleCollider2D>().enabled = false;
             }
         }
     }

@@ -14,6 +14,9 @@ public class Border : MonoBehaviour
 
     private void EnterBorder()
     {
-        Debug.Log("Border");
+        if(MainGameManager.GameMode.IsBorder)
+        {
+            MainGameManager.Instance.SnakeDie();
+        }
     }
 }

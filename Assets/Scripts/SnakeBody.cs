@@ -26,7 +26,7 @@ public class SnakeBody : MonoBehaviour
 
     public Vector3 UpdatePos(Vector3 pos, bool isSpeedUp = false)
     {
-        if(isSpeedUp)
+        if (isSpeedUp)
         {
             PosQueue.Dequeue();
         }
@@ -50,6 +50,6 @@ public class SnakeBody : MonoBehaviour
 
     private void EnterBody(GameObject body)
     {
-        Debug.Log(body.name);
+        MainGameManager.Instance.SnakeDie();
     }
 }

@@ -5,25 +5,35 @@ using UnityEngine;
 public class SnakeHead : SnakeBody
 {
     [SerializeField]
+    private GameObject dieEffectPrefab;
+    [SerializeField]
     private const int baseSpeed = 1;
     [SerializeField]
     private const int upSpeed = 2;
+
+    private bool isDie;
+    private bool isBorder;
 
     private bool isSpeedUp;
     private float nowSpeed = baseSpeed;
     private Vector2 movePos;
 
+
     private SnakeBodyController snakeBodyCtrl;
 
     private void Update()
     {
-        WillMove();
-        MoveBody();
-        MoveBorder();
+        if (!isDie)
+        {
+            WillMove();
+            MoveBody();
+            MoveBorder();
+        }
     }
 
-    public SnakeHead Init()
+    public SnakeHead Init(bool _isBorder)
     {
+        isBorder = _isBorder;
         return (SnakeHead)Init(transform.position);
     }
 
@@ -78,26 +88,29 @@ public class SnakeHead : SnakeBody
 
     private void MoveBorder()
     {
-        Vector3 newPos = transform.position;
-        Vector4 border = MainGameManager.Instance.BorderManager.Border;
-        if (newPos.y > border.w)
+        if(!isBorder)
         {
-            newPos.y = border.y;
-        }
-        else if (newPos.y < border.y)
-        {
-            newPos.y = border.w;
-        }
-        else if (newPos.x > border.z)
-        {
-            newPos.x = border.x;
-        }
-        else if (newPos.x < border.x)
-        {
-            newPos.x = border.z;
-        }
+            Vector3 newPos = transform.position;
+            Vector4 border = MainGameManager.Instance.BorderManager.Border;
+            if (newPos.y > border.w)
+            {
+                newPos.y = border.y;
+            }
+            else if (newPos.y < border.y)
+            {
+                newPos.y = border.w;
+            }
+            else if (newPos.x > border.z)
+            {
+                newPos.x = border.x;
+            }
+            else if (newPos.x < border.x)
+            {
+                newPos.x = border.z;
+            }
 
-        transform.position = newPos;
+            transform.position = newPos;
+        }
     }
 
     private void Rotate(Vector2 rotate)
@@ -144,5 +157,14 @@ public class SnakeHead : SnakeBody
             snakeBodyCtrl.GrowBody(PosQueue.Peek());
         }
         MainGameManager.Instance.UpdateBodyLength(snakeBodyCtrl.GetBodyLength());
+    }
+
+    public void Die()
+    {
+        if(!isDie)
+        {
+            isDie = true;
+            Instantiate(dieEffectPrefab, transform.position, Quaternion.identity);
+        }
     }
 }

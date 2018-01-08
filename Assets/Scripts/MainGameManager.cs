@@ -22,6 +22,10 @@ public class MainGameManager : MonoBehaviour
     private int score;
     private int getFoodCount;
 
+    private bool isDie;
+
+    public static GameMode GameMode { get; private set; }
+
 
     private void Awake()
     {
@@ -29,7 +33,7 @@ public class MainGameManager : MonoBehaviour
         GameObjectRoot = GameObject.Find("GameObjectRoot").transform;
         BorderManager = GetComponent<BorderManager>();
         SpawnSnakeHead();
-        MainUIManager = GameObject.Find("UIRoot").GetComponent<MainUIManager>().Init(true);
+        MainUIManager = GameObject.Find("UIRoot").GetComponent<MainUIManager>().Init(GameMode.IsBorder);
         FoodManager = GetComponent<FoodManager>().Init(GameObjectRoot);
     }
 
@@ -38,10 +42,19 @@ public class MainGameManager : MonoBehaviour
         FoodManager.SpawnFood();
     }
 
+    public static void InitGameMode(bool isBorder, bool isYellowSkin)
+    {
+        if (GameMode == null)
+        {
+            GameMode = new GameMode();
+        }
+        GameMode = GameMode.Init(isBorder, isYellowSkin);
+    }
+
     private void SpawnSnakeHead()
     {
         var snakeParent = GameObjectRoot.Find("Snakes").transform;
-        SnakeHead = Instantiate(snakeHeadPrefab, snakeParent).Init();
+        SnakeHead = Instantiate(snakeHeadPrefab, snakeParent).Init(GameMode.IsBorder);
     }
 
     public void GetFood()
@@ -70,4 +83,19 @@ public class MainGameManager : MonoBehaviour
         MainUIManager.UpdatScore(score);
     }
 
+    public void PauseTime(out bool isPause)
+    {
+        isPause = Time.timeScale == 0;
+        Time.timeScale = isPause ? 1 : 0;
+    }
+
+    public void SnakeDie()
+    {
+        if (!isDie)
+        {
+            isDie = true;
+            SnakeHead.Die();
+            MainUIManager.ShowRestartButton();
+        }
+    }
 }

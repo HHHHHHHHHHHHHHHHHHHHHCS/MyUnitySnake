@@ -5,9 +5,16 @@ using UnityEngine.UI;
 
 public class MainUIManager : MonoBehaviour
 {
+    [SerializeField]
+    private Sprite pauseSprite, playSprite;
+
+
+    private Image pauseImage;
+    private GameObject restartButton;
     private Text modeTitle;
     private Text scoreText;
     private Text lengthText;
+
 
     public MainUIManager Init(bool isborder, int score = 0, int length = 0)
     {
@@ -17,10 +24,13 @@ public class MainUIManager : MonoBehaviour
         lengthText = root.Find("Score/LengthLabel/LenthText").GetComponent<Text>();
         root.Find("Buttons/BackHomeButton").GetComponent<Button>()
             .onClick.AddListener(BackHome);
-        root.Find("Buttons/PauseButton").GetComponent<Button>()
-            .onClick.AddListener(PauseTime);
+        pauseImage = root.Find("Buttons/PauseButton").GetComponent<Image>();
+        pauseImage.GetComponent<Button>().onClick.AddListener(PauseTime);
+        restartButton = root.Find("Buttons/RestartButton").gameObject;
+        restartButton.GetComponent<Button>().onClick.AddListener(Restart);
         UpdatScore(score);
         UpdateLength(length);
+        restartButton.SetActive(false);
         return this;
     }
 
@@ -48,11 +58,24 @@ public class MainUIManager : MonoBehaviour
 
     private void BackHome()
     {
-
+        SceneChanger.LoadStart();
     }
 
     private void PauseTime()
     {
+        bool isPause;
+        MainGameManager.Instance.PauseTime(out isPause);
+        pauseImage.sprite = isPause ? pauseSprite : playSprite;
+    }
 
+    public void Restart()
+    {
+        SceneChanger.LoadMain();
+    }
+
+    public void ShowRestartButton()
+    {
+        restartButton.SetActive(true);
+        pauseImage.gameObject.SetActive(false);
     }
 }
