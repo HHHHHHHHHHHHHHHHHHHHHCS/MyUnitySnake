@@ -1359,7 +1359,7 @@ GameObject:
   - component: {fileID: 664242329}
   - component: {fileID: 664242328}
   m_Layer: 5
-  m_Name: ScoreLabel
+  m_Name: BestScoreLabel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1612,7 +1612,7 @@ GameObject:
   - component: {fileID: 710628111}
   - component: {fileID: 710628110}
   m_Layer: 5
-  m_Name: LengthLabel
+  m_Name: BestLengthLabel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2300,7 +2300,7 @@ GameObject:
   m_Component:
   - component: {fileID: 995430154}
   m_Layer: 5
-  m_Name: HighestScore
+  m_Name: BestScore
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2752,7 +2752,7 @@ GameObject:
   - component: {fileID: 1187430612}
   - component: {fileID: 1187430611}
   m_Layer: 5
-  m_Name: LastScor4eText
+  m_Name: LastScoreText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2894,7 +2894,7 @@ GameObject:
   - component: {fileID: 1265035359}
   - component: {fileID: 1265035358}
   m_Layer: 5
-  m_Name: LengthLabel
+  m_Name: LastLengthLabel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3073,7 +3073,7 @@ GameObject:
   - component: {fileID: 1345194657}
   - component: {fileID: 1345194656}
   m_Layer: 5
-  m_Name: ScoreLabel
+  m_Name: LastScoreLabel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3668,7 +3668,7 @@ GameObject:
   - component: {fileID: 1637487663}
   - component: {fileID: 1637487662}
   m_Layer: 5
-  m_Name: HighestLengthText
+  m_Name: BestLengthText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4162,7 +4162,7 @@ GameObject:
   - component: {fileID: 1830219614}
   - component: {fileID: 1830219613}
   m_Layer: 5
-  m_Name: HighestScoreText
+  m_Name: BestScoreText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

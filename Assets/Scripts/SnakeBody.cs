@@ -6,7 +6,7 @@ public class SnakeBody : MonoBehaviour
 {
     public Queue<Vector3> PosQueue { get; private set; }
 
-    private const int queueLength = 30;
+    private const int queueLength = 25;
 
     public virtual SnakeBody Init(Vector3 pos, Sprite sprite)
     {

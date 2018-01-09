@@ -30,6 +30,10 @@ public class MainGameManager : MonoBehaviour
     private void Awake()
     {
         Instance = this;
+        if(GameMode==null)
+        {
+            GameMode = new GameMode();
+        }
         GameObjectRoot = GameObject.Find("GameObjectRoot").transform;
         BorderManager = GetComponent<BorderManager>();
         SpawnSnakeHead();
@@ -97,5 +101,6 @@ public class MainGameManager : MonoBehaviour
             SnakeHead.Die();
             MainUIManager.ShowRestartButton();
         }
+        GameDataManager.UpdateData(SnakeHead.GetBodyLength(), score);
     }
 }

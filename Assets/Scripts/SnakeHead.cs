@@ -21,7 +21,7 @@ public class SnakeHead : SnakeBody
 
     private SnakeBodyController snakeBodyCtrl;
 
-    private void Update()
+    private void FixedUpdate()
     {
         if (!isDie)
         {
@@ -81,8 +81,8 @@ public class SnakeHead : SnakeBody
     private void Move(Vector2 movePos)
     {
         Vector3 oldPos = transform.localPosition;
-        oldPos.x += movePos.x * Time.deltaTime * nowSpeed;
-        oldPos.y += movePos.y * Time.deltaTime * nowSpeed;
+        oldPos.x += movePos.x * Time.fixedDeltaTime * nowSpeed;
+        oldPos.y += movePos.y * Time.fixedDeltaTime * nowSpeed;
         transform.localPosition = oldPos;
     }
 
@@ -146,9 +146,14 @@ public class SnakeHead : SnakeBody
 
     }
 
+    public int GetBodyLength()
+    {
+        return snakeBodyCtrl.GetBodyLength();
+    }
+
     public void GrowUpBody()
     {
-        if (snakeBodyCtrl.GetBodyLength() > 0)
+        if (GetBodyLength() > 0)
         {
             snakeBodyCtrl.GrowBody();
         }
