@@ -4,14 +4,16 @@ using UnityEngine;
 
 public class GameMode
 {
+    public bool IsScienceSkin { get; private set; }
     public bool IsBorder { get; private set; }
-    public bool IsYellowSkin { get; private set; }
 
-    public GameMode Init(bool isBorder, bool isYellowSkin)
+
+    public static GameMode Init(bool isScienceSkin, bool isBorder)
     {
-        IsBorder = isBorder;
-        IsYellowSkin = isYellowSkin;
-        return this;
+        GameMode gm = new GameMode();
+        gm.IsScienceSkin = isScienceSkin;
+        gm.IsBorder = isBorder;
+        return gm;
     }
 
 }

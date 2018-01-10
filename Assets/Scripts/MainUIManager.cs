@@ -31,6 +31,7 @@ public class MainUIManager : MonoBehaviour
         UpdatScore(score);
         UpdateLength(length);
         restartButton.SetActive(false);
+        SetModeText(isborder);
         return this;
     }
 

@@ -30,9 +30,10 @@ public class MainGameManager : MonoBehaviour
     private void Awake()
     {
         Instance = this;
-        if(GameMode==null)
+        ResetTime();
+        if (GameMode == null)
         {
-            GameMode = new GameMode();
+            InitGameMode(true, true);
         }
         GameObjectRoot = GameObject.Find("GameObjectRoot").transform;
         BorderManager = GetComponent<BorderManager>();
@@ -46,13 +47,9 @@ public class MainGameManager : MonoBehaviour
         FoodManager.SpawnFood();
     }
 
-    public static void InitGameMode(bool isBorder, bool isYellowSkin)
+    public static void InitGameMode(bool isBorder, bool isScience)
     {
-        if (GameMode == null)
-        {
-            GameMode = new GameMode();
-        }
-        GameMode = GameMode.Init(isBorder, isYellowSkin);
+        GameMode = GameMode.Init(isBorder, isScience);
     }
 
     private void SpawnSnakeHead()
@@ -93,6 +90,11 @@ public class MainGameManager : MonoBehaviour
         Time.timeScale = isPause ? 1 : 0;
     }
 
+    public void ResetTime()
+    {
+        Time.timeScale = 1;
+    }
+
     public void SnakeDie()
     {
         if (!isDie)
@@ -101,6 +103,6 @@ public class MainGameManager : MonoBehaviour
             SnakeHead.Die();
             MainUIManager.ShowRestartButton();
         }
-        GameDataManager.UpdateData(SnakeHead.GetBodyLength(), score);
+        GameDataManager.UpdateData(GameMode,SnakeHead.GetBodyLength(), score);
     }
 }

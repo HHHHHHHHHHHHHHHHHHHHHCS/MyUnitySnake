@@ -89,6 +89,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5d22aa8c8ad30f3459969154233f44e5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  eatAudio: {fileID: 8300000, guid: ed2f178da0347e144b360bd45dd8fed6, type: 3}
+  dieAudio: {fileID: 8300000, guid: b973c078365b22e4392753cc963d9970, type: 3}
   dieEffectPrefab: {fileID: 1634319535482308, guid: cc0eaad91315662498cf87e25d839a8d,
     type: 2}
 --- !u!212 &212263603779168674

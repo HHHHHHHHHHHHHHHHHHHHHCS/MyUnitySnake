@@ -21,8 +21,8 @@ public class FoodManager : MonoBehaviour
     {
         if (!foodRoot)
         {
-            foodRoot = Instantiate(new GameObject(), root).transform;
-            foodRoot.name = "FoodRoot";
+            foodRoot = new GameObject("FoodRoot").transform;
+            foodRoot.SetParent(root);
         }
         CheckCanSpawnFood();
         CheckCanSpawnReward();

@@ -5,6 +5,8 @@ using UnityEngine;
 public class SnakeHead : SnakeBody
 {
     [SerializeField]
+    private AudioClip eatAudio, dieAudio;
+    [SerializeField]
     private GameObject dieEffectPrefab;
     [SerializeField]
     private const int baseSpeed = 1;
@@ -40,8 +42,17 @@ public class SnakeHead : SnakeBody
     public override SnakeBody Init(Vector3 pos)
     {
         movePos = new Vector2(1, 0);
+        bool isScience = MainGameManager.GameMode.IsScienceSkin;
+        if(isScience)
+        {
+            GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("SnakePart/sh01");
+        }
+        else
+        {
+            GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("SnakePart/sh02");
+        }
         snakeBodyCtrl = transform.parent
-            .GetComponent<SnakeBodyController>().Init();
+            .GetComponent<SnakeBodyController>().Init(isScience);
         return base.Init(pos);
     }
 
@@ -161,6 +172,7 @@ public class SnakeHead : SnakeBody
         {
             snakeBodyCtrl.GrowBody(PosQueue.Peek());
         }
+        AudioSource.PlayClipAtPoint(eatAudio, transform.position);
         MainGameManager.Instance.UpdateBodyLength(snakeBodyCtrl.GetBodyLength());
     }
 
@@ -169,6 +181,7 @@ public class SnakeHead : SnakeBody
         if(!isDie)
         {
             isDie = true;
+            AudioSource.PlayClipAtPoint(dieAudio, transform.position);
             Instantiate(dieEffectPrefab, transform.position, Quaternion.identity);
         }
     }

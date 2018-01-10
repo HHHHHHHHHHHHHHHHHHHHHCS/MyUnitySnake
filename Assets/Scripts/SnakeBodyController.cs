@@ -14,9 +14,19 @@ public class SnakeBodyController : MonoBehaviour
 
     private Queue<SnakeBody> snakeBodyQueue;
 
-    public SnakeBodyController Init()
+    public SnakeBodyController Init(bool isScience)
     {
         snakeBodyQueue = new Queue<SnakeBody>();
+        if(isScience)
+        {
+            bodySprites[0] = Resources.Load<Sprite>("SnakePart/sb0101");
+            bodySprites[1] = Resources.Load<Sprite>("SnakePart/sb0102");
+        }
+        else
+        {
+            bodySprites[0] = Resources.Load<Sprite>("SnakePart/sb0201");
+            bodySprites[1] = Resources.Load<Sprite>("SnakePart/sb0202");
+        }
         return this;
     }
 
